@@ -563,21 +563,25 @@ export const da = {
       {
         name: "OK",
         href: "https://www.ok.dk/lokalsporten",
+        logo: "/sponsors/ok.png",
         body: "Hver gang du tanker hos OK, kan du støtte klubben. Det koster dig ikke ekstra. OK betaler beløbet.",
       },
       {
         name: "Axon",
         href: "https://www.axonprofil.dk",
+        logo: "/sponsors/axon.png",
         body: "Axon laver reklameartikler med logo. Drikkedunke, t-shirts og det, en forening eller virksomhed skal bruge.",
       },
       {
         name: "Igniz",
         href: "https://igniz.dk",
+        logo: "/sponsors/igniz.jpg",
         body: "Igniz er certificerede brandrådgivere. De rådgiver på byggeprojekter, fra boliger til kultur, skoler og hospitaler.",
       },
       {
         name: "Portservice Nord",
         href: soonHref("portservice"),
+        logo: "/sponsors/portservice-nord.png",
         body: "Portservice Nord sælger, monterer og servicerer porte til både privat og erhverv. De holder til i Ellidshøj.",
       },
     ],

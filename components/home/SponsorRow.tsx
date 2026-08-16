@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/components/Button";
 import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
@@ -53,9 +54,20 @@ export function SponsorRow() {
                       : {})}
                     className="group flex h-full min-h-56 flex-col justify-between rounded-[1.75rem] bg-bg px-6 py-7 transition-colors hover:bg-ama-red sm:min-h-64 sm:px-8 sm:py-8"
                   >
-                    <p className="font-display text-4xl leading-none text-fg group-hover:text-white sm:text-5xl">
-                      {sponsor.name}
-                    </p>
+                    <span className="flex items-center gap-3">
+                      <span className="inline-flex h-11 w-14 shrink-0 items-center justify-center rounded-xl bg-white px-1.5">
+                        <Image
+                          src={sponsor.logo}
+                          alt=""
+                          width={80}
+                          height={44}
+                          className="h-8 w-auto max-w-full object-contain"
+                        />
+                      </span>
+                      <p className="font-display text-3xl leading-none text-fg group-hover:text-white sm:text-4xl">
+                        {sponsor.name}
+                      </p>
+                    </span>
                     <p className="mt-8 max-w-sm text-base leading-relaxed text-muted group-hover:text-white/80">
                       {sponsor.body}
                     </p>

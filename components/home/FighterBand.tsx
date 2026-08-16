@@ -85,12 +85,12 @@ export function FighterBand() {
           onPointerLeave={() => setPaused(false)}
         >
           <div
-            className="grid min-h-[32rem] lg:min-h-[38rem] lg:grid-cols-[minmax(16rem,0.82fr)_minmax(0,1.18fr)]"
+            className="grid min-h-[32rem] min-w-0 lg:min-h-[38rem] lg:grid-cols-[minmax(16rem,0.82fr)_minmax(0,1.18fr)]"
             role="group"
             aria-label={fighter.pickLabel}
             onKeyDown={onStageKeyDown}
           >
-            <div className="relative z-20 flex flex-col px-6 pt-6 pb-3 sm:px-8 sm:pt-8 lg:pb-8">
+            <div className="relative z-20 flex min-w-0 flex-col px-6 pt-6 pb-3 sm:px-8 sm:pt-8 lg:pb-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ama-red">
                 {fighter.eyebrow}
               </p>
@@ -104,7 +104,7 @@ export function FighterBand() {
                 {fighter.body}
               </p>
 
-              <ol className="-mx-6 mt-5 flex gap-1 overflow-x-auto overscroll-x-contain px-6 pb-1 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:mt-8 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+              <ol className="mt-5 flex min-w-0 gap-1 overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] lg:mt-8 lg:flex-col lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden">
                 {roster.map((member, index) => {
                   const selected = index === active;
                   const label = splitName(member.name);
@@ -155,7 +155,7 @@ export function FighterBand() {
               </div>
             </div>
 
-            <div className="relative min-h-[24rem] sm:min-h-[28rem]">
+            <div className="relative min-h-[24rem] min-w-0 overflow-hidden sm:min-h-[28rem]">
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,color-mix(in_srgb,#c47a3a_22%,var(--ama-red)_18%)_0%,transparent_58%)]"
@@ -163,12 +163,12 @@ export function FighterBand() {
 
               <p
                 aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-[8%] z-0 text-center font-display text-[clamp(4.5rem,16vw,9.5rem)] leading-[0.78] uppercase text-transparent [text-stroke:1.5px_rgb(243_242_238_/_0.14)] [-webkit-text-stroke:1.5px_rgb(243_242_238_/_0.14)]"
+                className="pointer-events-none absolute inset-x-0 top-[8%] z-0 overflow-hidden text-center font-display text-[clamp(3.5rem,18vw,9.5rem)] leading-[0.78] uppercase text-transparent [text-stroke:1.5px_rgb(243_242_238_/_0.14)] [-webkit-text-stroke:1.5px_rgb(243_242_238_/_0.14)]"
               >
                 {last}
               </p>
 
-              <div className="absolute inset-x-[8%] bottom-0 top-8 z-10 sm:inset-x-[12%] sm:top-6">
+              <div className="absolute inset-x-10 bottom-0 top-10 z-10 sm:inset-x-16 sm:top-8 lg:inset-x-[4%] lg:left-[8%] lg:right-[-6%] lg:top-6">
                 <Image
                   key={person.image}
                   src={person.image}
@@ -194,10 +194,10 @@ export function FighterBand() {
                     {first}
                   </p>
                 ) : null}
-                <p className="font-display text-5xl leading-none uppercase sm:text-6xl lg:text-7xl">
+                <p className="font-display text-4xl leading-none uppercase sm:text-6xl lg:text-7xl">
                   {last}
                 </p>
-                <p className="mt-3 max-w-md text-base text-white/70">
+                <p className="mt-3 max-w-full text-base leading-relaxed text-white/70 lg:max-w-md">
                   {person.titles.length > 0
                     ? person.titles.join(" · ")
                     : person.body}

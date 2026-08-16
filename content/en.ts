@@ -564,21 +564,25 @@ export const en = {
       {
         name: "OK",
         href: "https://www.ok.dk/lokalsporten",
+        logo: "/sponsors/ok.png",
         body: "Every time you fill up at OK, you can support the club. It costs you nothing extra. OK pays the amount.",
       },
       {
         name: "Axon",
         href: "https://www.axonprofil.dk",
+        logo: "/sponsors/axon.png",
         body: "Axon makes promotional products with a logo. Bottles, t-shirts and what a club or company needs.",
       },
       {
         name: "Igniz",
         href: "https://igniz.dk",
+        logo: "/sponsors/igniz.jpg",
         body: "Igniz are certified fire safety advisors. They advise on building projects, from housing to culture, schools and hospitals.",
       },
       {
         name: "Portservice Nord",
         href: soonHref("portservice"),
+        logo: "/sponsors/portservice-nord.png",
         body: "Portservice Nord sells, installs and services doors for homes and businesses. They are based in Ellidshøj.",
       },
     ],

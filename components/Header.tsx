@@ -85,7 +85,7 @@ export function Header() {
         if (!mobileOpen) setMega(null);
       }}
     >
-      <div className="border-b border-line bg-bg/90 backdrop-blur-md">
+      <div className="relative z-50 border-b border-line bg-bg/90 backdrop-blur-md">
         <Shell>
           <div className="flex h-16 items-center justify-between gap-3 lg:h-20">
             <a href={href("/")} className="shrink-0" aria-label={site.name} onClick={closeAll}>
@@ -130,9 +130,7 @@ export function Header() {
             </nav>
 
             <div className="flex shrink-0 items-center gap-2">
-              <div className="hidden lg:block">
-                <LanguageSwitcher />
-              </div>
+              <LanguageSwitcher />
               <div className="hidden items-center gap-2 lg:flex">
                 <Button href={site.conventus.login} variant="ghost" className="h-11 px-5 py-0">
                   {ui.login}
@@ -220,10 +218,10 @@ export function Header() {
           className="fixed inset-x-0 top-16 z-40 h-[calc(100dvh-4rem)] overflow-y-auto bg-bg lg:hidden"
         >
           <Shell className="flex flex-col pb-8 pt-3">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <Button
                 href={site.conventus.trial}
-                className="h-11 min-w-0 flex-1 py-0"
+                className="h-11 py-0"
                 onClick={closeAll}
               >
                 {hero.ctaShort}
@@ -231,12 +229,11 @@ export function Header() {
               <Button
                 href={site.conventus.login}
                 variant="ghost"
-                className="h-11 px-4 py-0"
+                className="h-11 py-0"
                 onClick={closeAll}
               >
                 {ui.login}
               </Button>
-              <LanguageSwitcher />
             </div>
 
             <nav className="mt-5" aria-label={ui.mobileNav}>

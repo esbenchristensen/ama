@@ -61,7 +61,7 @@ export function Footer() {
               © {new Date().getFullYear()} {site.name} · {site.cvr}
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <LanguageSwitcher />
+              <LanguageSwitcher placement="up" />
               <a
                 href={site.facebook}
                 className="text-base text-muted hover:text-fg"
