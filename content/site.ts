@@ -1,0 +1,558 @@
+export const origin = "https://aalborgmartialarts.dk";
+export const comingSoonPath = "/kommer-snart";
+
+export function soonHref(side?: string) {
+  if (!side) return comingSoonPath;
+  return `${comingSoonPath}?side=${encodeURIComponent(side)}`;
+}
+
+export const comingSoon = {
+  eyebrow: "Kommer snart",
+  title: "Den side er på vej",
+  topicLead: "er på vej.",
+  body: "Vi bygger siderne til hold og klubben færdige. Indtil da kan du booke din første træning eller læse videre på forsiden.",
+  home: "Til forsiden",
+} as const;
+
+export const seo = {
+  title: "Kampsport i Aalborg | Aalborg Martial Arts",
+  description:
+    "Kickboxing, Muay Thai, boksning og MMA hos Aalborg Martial Arts i Nordkraft. Fra første træning til kamphold og landshold. Børn, motion og kæmpere. Samme klub.",
+  keywords: [
+    "kampsport Aalborg",
+    "kickboxing Aalborg",
+    "Muay Thai Aalborg",
+    "boksning Aalborg",
+    "MMA Aalborg",
+    "kamphold Aalborg",
+    "kickboxing landshold",
+    "K1 Aalborg",
+    "kampsport begynder Aalborg",
+    "kampsport øvet Aalborg",
+    "Kick'n Burn Aalborg",
+    "børn kampsport Aalborg",
+    "Aalborg Martial Arts",
+    "AMA Nordkraft",
+    "kampsport Nordkraft",
+  ],
+} as const;
+
+export const geo = {
+  latitude: 57.0506,
+  longitude: 9.9222,
+  maps: "https://maps.google.com/?q=Teglgaardsplads+1,+9000+Aalborg",
+} as const;
+
+export const site = {
+  name: "Aalborg Martial Arts",
+  shortName: "AMA",
+  tagline:
+    "Du behøver hverken at være i form eller have grej. Er du ny, tager vi hånd om dig og får dig med, også når salen ikke kun er begyndere.",
+  email: "info@aalborgmartialarts.dk",
+  phone: "+45 00 00 00 00",
+  cvr: "CVR 00000000",
+  address: {
+    line1: "Teglgaardsplads 1",
+    line2: "Nordkraft, 9000 Aalborg",
+  },
+  facebook: "https://www.facebook.com/aalborgmartialarts",
+  conventus: {
+    trial: "https://aalborgmartialarts.dk/medlem/",
+    login: "https://aalborgmartialarts.dk/medlem/medlemslogin/",
+    book: "https://aalborgmartialarts.dk/medlem/traeningsplan/",
+  },
+} as const;
+
+export const megaNav = [
+  {
+    id: "hold",
+    label: "Hold",
+    href: "/#hold",
+    items: [
+      {
+        icon: "user",
+        label: "Voksen begynder",
+        hint: "Kickboxing, Muay Thai, boksning og MMA",
+        href: soonHref("Voksen begynder"),
+        image: "/media/punch-pads.jpg",
+      },
+      {
+        icon: "users",
+        label: "Barn og ung",
+        hint: "7–10 år og 11–17 år",
+        href: soonHref("Barn og ung"),
+        image: "/media/sparring.jpg",
+      },
+      {
+        icon: "flame",
+        label: "Kick'n Burn",
+        hint: "Kondition. Næsten uden kontakt.",
+        href: soonHref("Kick'n Burn"),
+        image: "/media/fairtex.jpg",
+      },
+      {
+        icon: "trophy",
+        label: "Kamp",
+        hint: "Øvet og stævner. Oprykning efter aftale.",
+        href: soonHref("Kamp"),
+        image: "/media/kick-ring.jpg",
+      },
+    ],
+  },
+  {
+    id: "start",
+    label: "Kom i gang",
+    href: "/#tryghed",
+    items: [
+      {
+        icon: "steps",
+        label: "Første træning",
+        hint: "Tøj, vand og fire trin",
+        href: "/#proeve",
+        image: "/media/guard.jpg",
+      },
+      {
+        icon: "help",
+        label: "FAQ",
+        hint: "Booking, hold og grej",
+        href: "/#faq",
+        image: "/media/punch-pads.jpg",
+      },
+      {
+        icon: "tag",
+        label: "Priser",
+        hint: "49, 99 eller 249 kr. om måneden",
+        href: "/#priser",
+        image: "/media/hero-still.jpg",
+      },
+      {
+        icon: "users",
+        label: "Medlemmer",
+        hint: "Hvad de siger om klubben",
+        href: "/#stemmer",
+        image: "/media/kristoffer-poster.jpg",
+      },
+    ],
+  },
+  {
+    id: "tider",
+    label: "Tider",
+    href: "/#tider",
+    items: [
+      {
+        icon: "calendar",
+        label: "Ugeplan",
+        hint: "Se næste hold og book plads",
+        href: "/#tider",
+        image: "/media/sparring.jpg",
+      },
+    ],
+  },
+  {
+    id: "klubben",
+    label: "Klubben",
+    href: "/#om",
+    items: [
+      {
+        icon: "pin",
+        label: "Find os",
+        hint: "Nordkraft, Aalborg",
+        href: "/#om",
+        image: "/media/nordkraft.png",
+      },
+      {
+        icon: "medal",
+        label: "Kæmpere",
+        hint: "Landshold og kamphold",
+        href: "/#kaempere",
+        image: "/media/kick-ring.jpg",
+      },
+      {
+        icon: "handshake",
+        label: "Sponsorer",
+        hint: "Partnere og bliv sponsor",
+        href: soonHref("Sponsorer"),
+        image: "/media/nav-club.jpg",
+      },
+    ],
+  },
+] as const;
+
+export const hero = {
+  eyebrow: "Nordkraft · Aalborg",
+  title: "Kom som du er",
+  titleAccent: "I dit tempo",
+  cta: "Book første træning",
+  ctaShort: "Første træning",
+  secondary: "Sådan foregår det",
+  proof: "Børn, motion og kamphold. Samme klub.",
+} as const;
+
+export const pricing = {
+  eyebrow: "Kontingent",
+  title: "Medlemskab",
+  tiers: [
+    { id: "senior", label: "Senior", age: "18+", price: 249 },
+    { id: "junior", label: "Junior", age: "11–17 år", price: 99 },
+    { id: "barn", label: "Barn", age: "7–10 år", price: 49 },
+  ],
+  included: [
+    "Ét kontingent dækker al træning i din aldersgruppe",
+    "Ingen tillæg for ekstra hold",
+    "Du kan låne grej, til du selv har købt",
+    "De første 14 dage er uden binding, hvis du vil prøve salen først",
+    "Rabatkoder til eget grej og klubtøj",
+  ],
+  trialLine: "Du kan låne grej til de første træninger, og der er ingen binding.",
+} as const;
+
+export const barriers = {
+  eyebrow: "Før du starter",
+  title: "Det, de fleste tænker",
+  lead: "Det er helt almindeligt at tænke på, om man bliver slået, ser dum ud eller møder op uden at vide, hvad man skal. Her er, hvordan det faktisk foregår hos os.",
+  items: [
+    {
+      id: "skade",
+      fear: "Jeg bliver smadret",
+      answer:
+        "Du træner på det niveau, din makker er på. På begynderholdene arbejder vi med teknik, pads og sække, ikke med kamp. Til Kick'n Burn er der næsten ingen kontakt. Du kan godt få et blåt mærke. Du bliver ikke kørt over.",
+    },
+    {
+      id: "form",
+      fear: "Jeg er i for dårlig form",
+      answer:
+        "Du behøver ikke være i form, før du starter. Det er noget af det, træningen giver dig. Vi har medlemmer i alle aldre, og du træner efter evne. Det er aldrig for sent.",
+    },
+    {
+      id: "passe",
+      fear: "Jeg passer ikke ind",
+      answer:
+        "Alle i salen har været nye engang. Er du ny, tager vi hånd om dig og får dig med, også når holdet ikke kun er begyndere. Holdene er for både kvinder og mænd, og vi vil gerne have flere kvinder med.",
+    },
+    {
+      id: "kamp",
+      fear: "Jeg skal vel kæmpe",
+      answer:
+        "De fleste træner for at komme i form og stiller aldrig op i en ring. Kamphold er et tilvalg, når du og træneren er enige om, at du er klar. Du vælger selv, hvor langt du vil.",
+    },
+    {
+      id: "start",
+      fear: "Jeg ved ikke, hvordan man starter",
+      answer:
+        "Du booker en tid og møder op. Hvordan det foregår, står i Fire trin længere nede på siden.",
+    },
+  ],
+} as const;
+
+export const doors = {
+  eyebrow: "Hold",
+  title: "Hvor vil du starte?",
+  lead: "Du behøver ikke kende alle holdnavnene. Vælg det spor, der passer, så finder vi niveauet sammen.",
+  items: [
+    {
+      id: "begynder",
+      title: "Voksen begynder",
+      description:
+        "Kickboxing, Muay Thai, boksning eller MMA. Du starter stille og roligt, også selvom du aldrig har prøvet det.",
+      href: soonHref("Voksen begynder"),
+      image: "/media/punch-pads.jpg",
+    },
+    {
+      id: "barn",
+      title: "Barn og ung",
+      description: "Hold til 7–10 år og 11–17 år. Teknik, leg og et trygt fællesskab.",
+      href: soonHref("Barn og ung"),
+      image: "/media/sparring.jpg",
+    },
+    {
+      id: "kicknburn",
+      title: "Kick'n Burn",
+      description:
+        "Kondition og styrke med øvelser fra kampsport, og næsten uden kontakt.",
+      href: soonHref("Kick'n Burn"),
+      image: "/media/fairtex.jpg",
+    },
+    {
+      id: "kamp",
+      title: "Kamp",
+      description:
+        "For dig, der allerede træner og gerne vil stille op. Oprykning sker efter aftale med træneren.",
+      href: soonHref("Kamp"),
+      image: "/media/kick-ring.jpg",
+    },
+  ],
+} as const;
+
+export const startSteps = {
+  eyebrow: "Første træning",
+  title: "Fire trin",
+  items: [
+    {
+      step: 1,
+      title: "Tag tøj og vand med",
+      description:
+        "Træningstøj og en flaske vand er nok. Du behøver ikke købe noget, før du har prøvet det.",
+    },
+    {
+      step: 2,
+      title: "Lån grej i salen",
+      description:
+        "Vi har handsker og benskinner, du kan låne, så du kan møde op uden at have købt udstyr.",
+    },
+    {
+      step: 3,
+      title: "Træneren tager imod dig",
+      description:
+        "Sig, at det er din første gang. Vi tager hånd om dig og får dig med i træningen, også når holdet ikke kun er nye.",
+    },
+    {
+      step: 4,
+      title: "Beslut dig bagefter",
+      description:
+        "Hvis det føles rigtigt, kan du blive medlem som barn, junior eller senior. Hvis ikke, stopper du. Der er ingen binding.",
+    },
+  ],
+} as const;
+
+export const voices = {
+  eyebrow: "Medlemmer",
+  title: "Se hvad vores medlemmer siger",
+  lead: "Forskellige hold og niveauer. Samme klub. Her er et par af dem, der træner hos os.",
+  items: [
+    {
+      name: "Fra holdet",
+      sport: "Kickboxing",
+      level: "Motion",
+      src: "/media/hero-clip-a.mp4",
+    },
+    {
+      name: "Kristoffer Lundholm",
+      sport: "Kickboxing",
+      level: "Motion",
+      src: "/media/kristoffer.mp4",
+    },
+    {
+      name: "I salen",
+      sport: "Kickboxing",
+      level: "Øvet",
+      src: "/media/voice-hold.mp4",
+    },
+  ],
+} as const;
+
+export const faq = {
+  eyebrow: "FAQ",
+  title: "Praktiske spørgsmål",
+  lead: "Det, der ikke handler om frygt eller første træning. Hold, booking, klubtøj og reception.",
+  groups: [
+    {
+      id: "hold",
+      title: "Hold og niveauer",
+      items: [
+        {
+          id: "alder",
+          q: "Hvilke aldre træner hos jer?",
+          a: "Vi har hold til børn på 7–10 år, unge på 11–17 år og voksne. Er du 15–17 år og skarp og moden nok, kan trænerne give junioradgang, så du også kan træne på voksenholdene.",
+        },
+        {
+          id: "niveauer",
+          q: "Hvad er forskellen på begynder, øvet og kamphold?",
+          a: "De fleste starter på begynderholdene og træner teknik, pads og sække. Når du har været i gang et stykke tid, kan du rykke op på øvede hold. Kamphold er for dig, der gerne vil stille op, og oprykning sker efter aftale med træneren.",
+        },
+        {
+          id: "andre-hold",
+          q: "Hvilke andre hold har I?",
+          a: "Ud over de fire spor har vi Open Gym, hvor du træner selv, Go'morn boksning tidligt på dagen, sparring, wrestling og grappling, og udendørs træning, når kalenderen tillader det. Tiderne står i ugeplanen.",
+        },
+      ],
+    },
+    {
+      id: "praktisk",
+      title: "Praktisk",
+      items: [
+        {
+          id: "booking",
+          q: "Hvordan booker jeg træning?",
+          a: "Du booker plads, når du er logget ind med et medlemskab. Uden login og kontingent kan du ikke reservere en tid. Første gang opretter du dig via knappen til første træning.",
+        },
+        {
+          id: "binding",
+          q: "Er der binding, og hvordan framelder jeg?",
+          a: "Der er ingen binding. Vil du stoppe, framelder du dig. Du er ikke bundet til et forløb, du ikke har lyst til.",
+        },
+        {
+          id: "toj",
+          q: "Hvor får jeg klubtøj og rabatkoder?",
+          a: "Som medlem kan du købe klubtøj og få rabatkoder til eget grej. Spørg i receptionen eller skriv til os, så hjælper vi dig med koderne.",
+        },
+        {
+          id: "frivillig",
+          q: "Kan jeg blive frivillig?",
+          a: "Ja. Vi har altid brug for folk, der vil hjælpe i salen, i receptionen eller omkring holdene. Skriv til os eller kom forbi, så finder vi en opgave, der passer til dig.",
+        },
+        {
+          id: "reception",
+          q: "Hvornår er receptionen åben?",
+          a: "Receptionen er åben mandag og onsdag cirka 17.15–20.00, når der er hold. Uden for de tider kan du skrive til os eller kigge forbi, når der trænes.",
+        },
+      ],
+    },
+  ],
+} as const;
+
+export const fighter = {
+  eyebrow: "Ambition",
+  headline: "Landsholdskæmpere",
+  watermark: "LANDSHOLD",
+  body: "Seks kæmpere er udtaget til kickboxing-landsholdet. Tre på netto og tre på brutto. Kampholdet er ikke første skridt. Du rykker op, når du er klar.",
+  cta: "Se kamphold",
+  ctaHref: soonHref("Kamp"),
+  photoCredit: "Foto: Krebs Photo",
+  fighters: [
+    {
+      image: "/fighters/fighter-04.png",
+      name: "Charlie Toma",
+      role: "Netto landshold",
+      titles: [
+        "Dansk mester",
+        "Nordisk mester",
+        "King of the Ring",
+        "Danish Open",
+      ],
+      body: "Charlie har kæmpet MMA, brydning, kickboxing og muay thai. Han er på netto landsholdet, og titlerne er hentet i ringen.",
+    },
+    {
+      image: "/fighters/fighter-02.png",
+      name: "Dilsa Kalan",
+      role: "Brutto landshold",
+      titles: [],
+      body: "Dilsa er på brutto landsholdet og kæmper for Aalborg Martial Arts.",
+    },
+    {
+      image: "/fighters/fighter-03.png",
+      name: "Martin Vemmelund",
+      role: "Netto landshold",
+      titles: [
+        "King of the Ring",
+        "WBC Muay Thai",
+        "Årets mandlige kæmper 2023",
+      ],
+      body: "Martin har vundet King of the Ring i kickboxing og WBC-bæltet i muay thai. Dansk Kickboxing Forbund kårede ham som årets mandlige kæmper i 2023.",
+    },
+    {
+      image: "/fighters/fighter-05.png",
+      name: "Simon Jounan",
+      role: "Netto landshold",
+      titles: ["2x dansk mester i K1", "Årets mandlige kæmper 2024"],
+      body: "Simon har kæmpet både K1 og muay thai. I 2024 kårede Dansk Kickboxing Forbund ham som årets mandlige kæmper.",
+    },
+    {
+      image: "/fighters/fighter-01.png",
+      name: "Yousef Jambali",
+      role: "Brutto landshold",
+      titles: [],
+      body: "Yousef er på brutto landsholdet. Han slår hårdt og har baggrund i både K1 og muay thai.",
+    },
+    {
+      image: "/fighters/fighter-06.png",
+      name: "Salem Salal",
+      role: "Brutto landshold",
+      titles: ["3x dansk mester", "Nordisk mester"],
+      body: "Salem har baggrund i kickboxing og boksning og har kæmpet for klubben længe. Han har kæmpet letkontakt, fuldkontakt og K1. Tre gange dansk mester og en gang nordisk mester.",
+    },
+  ],
+} as const;
+
+export const findUs = {
+  eyebrow: "Nordkraft",
+  title: "Find os",
+  body: "Vi træner i Nordkraft midt i Aalborg. Du er velkommen til at kigge forbi og se en træning, eller booke din første time. Du behøver ikke have besluttet noget på forhånd.",
+  reception: "Receptionen er åben mandag og onsdag cirka 17.15–20.00, når der er hold.",
+} as const;
+
+export const newsTeaser = {
+  eyebrow: "Klubben",
+  title: "Nyt fra klubben",
+  item: {
+    date: "Marts 2026",
+    headline: "Næste stævne og klubaften",
+    body: "Hold øje her og i Facebook-gruppen, når der er aflysninger, stævner eller klubaftener. Når du er logget ind, kan du booke træning og se din kalender.",
+  },
+} as const;
+
+export const weekdays = [
+  "Mandag",
+  "Tirsdag",
+  "Onsdag",
+  "Torsdag",
+  "Fredag",
+  "Lørdag",
+  "Søndag",
+] as const;
+
+export type Weekday = (typeof weekdays)[number];
+
+export const schedule = {
+  eyebrow: "Tider",
+  title: "Ugeplan",
+  lead: "Vælg en dag og se holdene. Du booker plads, når du er logget ind.",
+  cta: "Book træning",
+  emptyToday: "Ingen hold i dag",
+  emptyHint: "Vælg en anden dag, hvis du vil se resten af ugen.",
+} as const;
+
+export const sponsors = {
+  eyebrow: "Samarbejde",
+  title: "Vores partnere",
+  lead: "Uden sponsorer hænger en lokal klub ikke sammen. De her virksomheder er med til at holde træning, stævner og hverdagen i Nordkraft kørende.",
+  thanks: "Tak fordi I er med.",
+  cta: "Bliv sponsor",
+  ctaHref: soonHref("Sponsorer"),
+  write: "Skriv til os",
+  items: [
+    {
+      name: "OK",
+      href: "https://www.ok.dk/lokalsporten",
+      body: "Hver gang du tanker hos OK, kan du støtte klubben. Det koster dig ikke ekstra. OK betaler beløbet.",
+    },
+    {
+      name: "Axon",
+      href: "https://www.axonprofil.dk",
+      body: "Axon laver reklameartikler med logo. Drikkedunke, t-shirts og det, en forening eller virksomhed skal bruge.",
+    },
+    {
+      name: "Igniz",
+      href: "https://igniz.dk",
+      body: "Igniz er certificerede brandrådgivere. De rådgiver på byggeprojekter, fra boliger til kultur, skoler og hospitaler.",
+    },
+    {
+      name: "Portservice Nord",
+      href: soonHref("Portservice Nord"),
+      body: "Portservice Nord sælger, monterer og servicerer porte til både privat og erhverv. De holder til i Ellidshøj.",
+    },
+  ],
+} as const;
+
+export const nextSessions = [
+  { day: "Mandag", time: "16:00", title: "Børn 7–10", spots: "Ledig" },
+  { day: "Mandag", time: "17:30", title: "Kick / Thai begynder", spots: "Ledig" },
+  { day: "Mandag", time: "19:00", title: "Kick / Thai øvet", spots: "Få pladser" },
+  { day: "Tirsdag", time: "16:00", title: "Børn 7–10", spots: "Ledig" },
+  { day: "Tirsdag", time: "17:30", title: "Boksning begynder", spots: "Ledig" },
+  { day: "Tirsdag", time: "19:00", title: "Kamp", spots: "Få pladser" },
+  { day: "Onsdag", time: "18:00", title: "Kick'n Burn", spots: "Ledig" },
+  { day: "Onsdag", time: "19:15", title: "Kick / Thai begynder", spots: "Ledig" },
+  { day: "Onsdag", time: "20:30", title: "Kick / Thai øvet", spots: "Ledig" },
+  { day: "Torsdag", time: "16:00", title: "Børn 7–10", spots: "Ledig" },
+  { day: "Torsdag", time: "17:30", title: "Kick / Thai begynder", spots: "Ledig" },
+  { day: "Torsdag", time: "19:00", title: "Boksning begynder", spots: "Få pladser" },
+  { day: "Fredag", time: "17:00", title: "Kick'n Burn", spots: "Ledig" },
+  { day: "Fredag", time: "18:30", title: "Åben træning", spots: "Ledig" },
+  { day: "Lørdag", time: "10:00", title: "Børn 7–10", spots: "Ledig" },
+  { day: "Lørdag", time: "11:30", title: "Kick / Thai begynder", spots: "Ledig" },
+] as const satisfies readonly {
+  day: Weekday;
+  time: string;
+  title: string;
+  spots: "Ledig" | "Få pladser";
+}[];

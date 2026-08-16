@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" fill="none">
+  <rect width="400" height="560" fill="#171717"/>
+  <path d="M200 80c-48 0-88 40-88 88s40 88 88 88 88-40 88-88-40-88-88-88z" fill="#2a2a2a"/>
+  <path d="M120 280c0-20 36-36 80-36s80 16 80 36v40c0 60-36 120-80 120s-80-60-80-120v-40z" fill="#2a2a2a"/>
+  <path d="M95 300c-12 40-8 90 10 120" stroke="#3a3a3a" stroke-width="28" stroke-linecap="round"/>
+  <path d="M305 300c12 40 8 90-10 120" stroke="#3a3a3a" stroke-width="28" stroke-linecap="round"/>
+  <text x="200" y="520" text-anchor="middle" fill="#d32029" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="0.15em">CUTOUT PLACEHOLDER</text>
+</svg>
