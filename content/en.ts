@@ -43,7 +43,7 @@ export const en = {
     language: "Language",
     theme: "Change theme",
     themeNow: "Change theme. Now",
-    themeTitle: "Switch between dark, light and system",
+    themeTitle: "Switch between dark and light",
     dark: "Dark",
     light: "Light",
     system: "System",

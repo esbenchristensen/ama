@@ -42,7 +42,7 @@ export const da = {
     language: "Sprog",
     theme: "Skift tema",
     themeNow: "Skift tema. Nu",
-    themeTitle: "Skift mellem mørk, lys og system",
+    themeTitle: "Skift mellem mørk og lys",
     dark: "Mørk",
     light: "Lys",
     system: "System",

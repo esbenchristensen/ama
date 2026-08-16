@@ -3,15 +3,10 @@ export function ThemeScript() {
 (function () {
   try {
     var stored = localStorage.getItem("ama-theme");
-    var pref = stored === "light" || stored === "system" ? stored : "dark";
-    var theme = pref;
-    if (pref === "system") {
-      theme = window.matchMedia("(prefers-color-scheme: light)").matches
-        ? "light"
-        : "dark";
-    }
+    var theme = stored === "light" ? "light" : "dark";
+    if (stored !== theme) localStorage.setItem("ama-theme", theme);
     document.documentElement.dataset.theme = theme;
-    document.documentElement.dataset.themePref = pref;
+    document.documentElement.dataset.themePref = theme;
   } catch (e) {
     document.documentElement.dataset.theme = "dark";
     document.documentElement.dataset.themePref = "dark";
