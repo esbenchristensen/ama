@@ -29,6 +29,7 @@ export function NavItem({
           src={image}
           alt=""
           fill
+          quality={65}
           className={`${
             imageFit === "contain" ? "object-contain object-top" : "object-cover"
           } transition-transform duration-500 group-hover:scale-105`}

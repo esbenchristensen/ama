@@ -1,7 +1,7 @@
 import { Icon } from "@/components/icons";
-import type { megaNav } from "@/content/site";
+import type { Dictionary } from "@/content/dictionary";
 
-type Item = (typeof megaNav)[number]["items"][number];
+type Item = Dictionary["megaNav"][number]["items"][number];
 
 export function NavLinks({
   items,

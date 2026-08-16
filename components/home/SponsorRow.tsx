@@ -1,8 +1,14 @@
+"use client";
+
 import { Button } from "@/components/Button";
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { site, sponsors } from "@/content/site";
+import { site } from "@/content/site";
 
 export function SponsorRow() {
+  const { dict, href } = useI18n();
+  const { sponsors } = dict;
+
   return (
     <section
       id="sponsorer"
@@ -28,7 +34,7 @@ export function SponsorRow() {
               <p className="mt-3 text-base font-semibold text-fg">{sponsors.thanks}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={sponsors.ctaHref}>{sponsors.cta}</Button>
+              <Button href={href(sponsors.ctaHref)}>{sponsors.cta}</Button>
               <Button href={`mailto:${site.email}`} variant="ghost">
                 {sponsors.write}
               </Button>
@@ -41,7 +47,7 @@ export function SponsorRow() {
               return (
                 <li key={sponsor.name}>
                   <a
-                    href={sponsor.href}
+                    href={href(sponsor.href)}
                     {...(external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}

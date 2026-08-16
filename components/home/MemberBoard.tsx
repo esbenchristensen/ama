@@ -2,60 +2,44 @@
 
 import { useState } from "react";
 import { Button } from "@/components/Button";
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import {
-  newsTeaser,
-  nextSessions,
-  schedule,
-  site,
-  weekdays,
-  type Weekday,
-} from "@/content/site";
+import { nextSessions, site, weekdayIds, type WeekdayId } from "@/content/site";
+import type { Dictionary } from "@/content/dictionary";
 
-const jsToDanish = [
-  "Søndag",
-  "Mandag",
-  "Tirsdag",
-  "Onsdag",
-  "Torsdag",
-  "Fredag",
-  "Lørdag",
-] as const satisfies readonly Weekday[];
+type ClassId = keyof Dictionary["schedule"]["classes"];
 
-const weekdayShort: Record<Weekday, string> = {
-  Mandag: "Man",
-  Tirsdag: "Tir",
-  Onsdag: "Ons",
-  Torsdag: "Tor",
-  Fredag: "Fre",
-  Lørdag: "Lør",
-  Søndag: "Søn",
-};
-
-function getTodayDanish(): Weekday {
-  const name = new Intl.DateTimeFormat("da-DK", {
-    weekday: "long",
+function todayWeekdayId(): WeekdayId {
+  const weekday = new Intl.DateTimeFormat("en-US", {
+    weekday: "short",
     timeZone: "Europe/Copenhagen",
-  })
-    .format(new Date())
-    .toLowerCase();
-  const match = weekdays.find((day) => day.toLowerCase() === name);
-  if (match) return match;
-
-  const copenhagen = new Date(
-    new Date().toLocaleString("en-US", { timeZone: "Europe/Copenhagen" }),
-  );
-  return jsToDanish[copenhagen.getDay()];
+  }).format(new Date());
+  const map: Record<string, WeekdayId> = {
+    Mon: "mon",
+    Tue: "tue",
+    Wed: "wed",
+    Thu: "thu",
+    Fri: "fri",
+    Sat: "sat",
+    Sun: "sun",
+  };
+  return map[weekday] ?? "mon";
 }
 
 export function MemberBoard() {
-  const today = getTodayDanish();
-  const [selectedDay, setSelectedDay] = useState<Weekday>(today);
+  const { dict, locale } = useI18n();
+  const { schedule, newsTeaser, ui } = dict;
+  const today = todayWeekdayId();
+  const [selectedDay, setSelectedDay] = useState<WeekdayId>(today);
   const sessions = nextSessions.filter((session) => session.day === selectedDay);
+  const dayName = schedule.weekdays[selectedDay];
   const emptyTitle =
     selectedDay === today
       ? schedule.emptyToday
-      : `Ingen hold ${selectedDay.toLowerCase()}`;
+      : schedule.emptyDay.replace(
+          "{day}",
+          locale === "da" ? dayName.toLowerCase() : dayName,
+        );
 
   return (
     <section id="tider" className="section-y">
@@ -70,15 +54,16 @@ export function MemberBoard() {
             </h2>
             <p className="mt-3 text-base text-muted">{schedule.lead}</p>
 
-            <div className="mt-6 grid grid-cols-7 gap-1.5" role="group" aria-label="Vælg dag">
-              {weekdays.map((day) => {
+            <div className="mt-6 grid grid-cols-7 gap-1.5" role="group" aria-label={ui.pickDay}>
+              {weekdayIds.map((day) => {
                 const selected = day === selectedDay;
+                const label = schedule.weekdays[day];
                 return (
                   <button
                     key={day}
                     type="button"
                     aria-pressed={selected}
-                    aria-label={day === today ? `${day}, i dag` : day}
+                    aria-label={day === today ? `${label}, ${ui.today}` : label}
                     onClick={() => setSelectedDay(day)}
                     className={`rounded-full px-1 py-2 text-center text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ama-red sm:text-sm ${
                       selected
@@ -86,7 +71,7 @@ export function MemberBoard() {
                         : "bg-bg text-muted hover:text-fg"
                     }`}
                   >
-                    {weekdayShort[day]}
+                    {schedule.weekdaysShort[day]}
                   </button>
                 );
               })}
@@ -96,17 +81,17 @@ export function MemberBoard() {
               <ul className="mt-6 space-y-3">
                 {sessions.map((session) => (
                   <li
-                    key={`${session.day}-${session.time}-${session.title}`}
+                    key={`${session.day}-${session.time}-${session.classId}`}
                     className="flex items-baseline justify-between gap-4 rounded-2xl bg-bg px-4 py-3"
                   >
                     <div>
                       <p className="font-display text-xl text-fg">
-                        {session.title}
+                        {schedule.classes[session.classId as ClassId]}
                       </p>
                       <p className="text-sm text-muted">{session.time}</p>
                     </div>
                     <span className="text-[11px] font-semibold uppercase tracking-wider text-faint">
-                      {session.spots}
+                      {schedule.spots[session.spots]}
                     </span>
                   </li>
                 ))}
@@ -148,7 +133,7 @@ export function MemberBoard() {
                 href={site.conventus.login}
                 className="mt-6 inline-block text-sm font-semibold text-ama-red"
               >
-                Log ind som medlem →
+                {ui.loginMember}
               </a>
             </article>
           </div>

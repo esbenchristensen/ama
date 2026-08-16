@@ -2,12 +2,16 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { Button } from "@/components/Button";
+import { useI18n } from "@/components/I18nProvider";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Logo } from "@/components/Logo";
 import { NavItem } from "@/components/NavItem";
 import { Shell } from "@/components/Shell";
-import { hero, megaNav, site } from "@/content/site";
+import { site } from "@/content/site";
 
 export function Header() {
+  const { dict, href } = useI18n();
+  const { hero, megaNav, ui } = dict;
   const [hidden, setHidden] = useState(false);
   const [mega, setMega] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -83,15 +87,15 @@ export function Header() {
       }}
     >
       <div className="border-b border-line bg-bg/90 backdrop-blur-md">
-        <Shell wide>
+        <Shell>
           <div className="flex h-20 items-center justify-between gap-3">
-            <a href="/" className="shrink-0" aria-label={site.name} onClick={closeAll}>
+            <a href={href("/")} className="shrink-0" aria-label={site.name} onClick={closeAll}>
               <Logo />
             </a>
 
             <nav
               className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 md:flex lg:gap-1"
-              aria-label="Hovedmenu"
+              aria-label={ui.mainNav}
             >
               {megaNav.map((item) => {
                 const isLink = item.items.length === 1;
@@ -100,7 +104,7 @@ export function Header() {
                   return (
                     <a
                       key={item.id}
-                      href={item.href}
+                      href={href(item.href)}
                       className="rounded-full px-3 py-2 text-base font-medium text-muted transition-colors hover:text-fg lg:px-4"
                       onClick={closeAll}
                     >
@@ -127,9 +131,12 @@ export function Header() {
             </nav>
 
             <div className="flex shrink-0 items-center gap-2">
+              <div className="hidden md:block">
+                <LanguageSwitcher />
+              </div>
               <div className="hidden items-center gap-2 lg:flex">
                 <Button href={site.conventus.login} variant="ghost" className="h-11 px-5 py-0">
-                  Log ind
+                  {ui.login}
                 </Button>
                 <Button href={site.conventus.trial} className="h-11 px-5 py-0">
                   {hero.ctaShort}
@@ -140,13 +147,13 @@ export function Header() {
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-fg md:hidden"
                 aria-expanded={mobileOpen}
                 aria-controls={`${menuId}-mobile`}
-                aria-label={mobileOpen ? "Luk menu" : "Åbn menu"}
+                aria-label={mobileOpen ? ui.closeMenu : ui.openMenu}
                 onClick={() => {
                   setMega(null);
                   setMobileOpen((value) => !value);
                 }}
               >
-                <span className="sr-only">{mobileOpen ? "Luk" : "Menu"}</span>
+                <span className="sr-only">{mobileOpen ? ui.close : ui.menu}</span>
                 <span className="relative block h-3.5 w-4">
                   <span
                     className={`absolute left-0 h-0.5 w-4 bg-current transition ${
@@ -178,7 +185,7 @@ export function Header() {
                 id={`${menuId}-${item.id}`}
                 className="absolute inset-x-0 top-full hidden md:block"
               >
-                <Shell wide className="pt-3">
+                <Shell className="pt-3">
                   <div className="rounded-[1.75rem] border border-line bg-surface p-4 shadow-2xl shadow-black/30 sm:p-5">
                     <div
                       className={`grid gap-3 ${
@@ -195,7 +202,7 @@ export function Header() {
                           icon={link.icon}
                           label={link.label}
                           hint={link.hint}
-                          href={link.href}
+                          href={href(link.href)}
                           image={"image" in link ? link.image : undefined}
                           onClick={closeAll}
                         />
@@ -213,17 +220,20 @@ export function Header() {
           id={`${menuId}-mobile`}
           className="fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-bg md:hidden"
         >
-          <Shell wide className="flex min-h-full flex-col pb-10 pt-4">
+          <Shell className="flex min-h-full flex-col pb-10 pt-4">
             <div className="flex flex-col gap-2">
               <Button href={site.conventus.trial} onClick={closeAll}>
                 {hero.cta}
               </Button>
               <Button href={site.conventus.login} variant="ghost" onClick={closeAll}>
-                Log ind
+                {ui.login}
               </Button>
+              <div className="pt-1">
+                <LanguageSwitcher />
+              </div>
             </div>
 
-            <nav className="mt-6" aria-label="Mobilmenu">
+            <nav className="mt-6" aria-label={ui.mobileNav}>
               {megaNav.map((item) => {
                 if (item.items.length === 1) {
                   const link = item.items[0];
@@ -233,7 +243,7 @@ export function Header() {
                         icon={link.icon}
                         label={item.label}
                         hint={link.hint}
-                        href={link.href}
+                        href={href(link.href)}
                         image={"image" in link ? link.image : undefined}
                         onClick={closeAll}
                       />
@@ -250,7 +260,7 @@ export function Header() {
                       onClick={() => setMobileAcc(open ? null : item.id)}
                     >
                       <span className="font-display text-3xl text-fg">{item.label}</span>
-                      <span className="text-ama-red">{open ? "–" : "+"}</span>
+                      <span className="text-ama-red">{open ? "-" : "+"}</span>
                     </button>
                     {open ? (
                       <div
@@ -262,7 +272,7 @@ export function Header() {
                             icon={link.icon}
                             label={link.label}
                             hint={link.hint}
-                            href={link.href}
+                            href={href(link.href)}
                             image={"image" in link ? link.image : undefined}
                             onClick={closeAll}
                           />

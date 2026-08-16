@@ -1,14 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/Button";
+import { useI18n } from "@/components/I18nProvider";
 import { HeroStage } from "@/components/home/HeroStage";
 import { Shell } from "@/components/Shell";
-import { hero, site } from "@/content/site";
-
+import { site } from "@/content/site";
 
 export function Hero() {
+  const { dict, href } = useI18n();
+  const { hero } = dict;
+
   return (
     <section className="flex min-h-0 flex-1 flex-col justify-center py-6 sm:py-8">
-      <Shell wide className="flex w-full flex-1 flex-col justify-center">
+      <Shell className="flex w-full flex-1 flex-col justify-center">
         <div className="grid flex-1 items-center gap-6 md:grid-cols-[minmax(22rem,1.1fr)_minmax(0,1fr)] md:gap-8 lg:gap-10">
           <div className="flex min-w-0 flex-col justify-center">
             <p className="inline-flex w-fit self-start rounded-full bg-ama-red/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ama-red">
@@ -21,13 +26,13 @@ export function Hero() {
               </span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-fg/75">
-              {site.tagline}
+              {dict.site.tagline}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
               <Button href={site.conventus.trial} className="w-full px-6 py-3.5 text-base sm:w-auto">
                 {hero.cta}
               </Button>
-              <Button href="/#tryghed" variant="ghost" className="w-full px-6 py-3.5 text-base sm:w-auto">
+              <Button href={href("/#tryghed")} variant="ghost" className="w-full px-6 py-3.5 text-base sm:w-auto">
                 {hero.secondary}
               </Button>
             </div>
@@ -39,7 +44,14 @@ export function Hero() {
                       key={src}
                       className="relative h-9 w-9 overflow-hidden rounded-full ring-2 ring-bg"
                     >
-                      <Image src={src} alt="" fill className="object-cover" sizes="36px" />
+                      <Image
+                        src={src}
+                        alt=""
+                        fill
+                        quality={40}
+                        className="object-cover"
+                        sizes="36px"
+                      />
                     </span>
                   ),
                 )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useI18n } from "@/components/I18nProvider";
 
 type Pref = "dark" | "light" | "system";
 
@@ -21,13 +22,14 @@ function apply(pref: Pref) {
 }
 
 const cycle: Pref[] = ["dark", "light", "system"];
-const labels: Record<Pref, string> = {
-  dark: "Mørk",
-  light: "Lys",
-  system: "System",
-};
 
 export function ThemeSwitcher({ className = "" }: { className?: string }) {
+  const { dict } = useI18n();
+  const labels: Record<Pref, string> = {
+    dark: dict.ui.dark,
+    light: dict.ui.light,
+    system: dict.ui.system,
+  };
   const [pref, setPref] = useState<Pref>("dark");
 
   useEffect(() => {
@@ -57,8 +59,8 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
         apply(next);
       }}
       className={`inline-flex h-11 items-center rounded-full border border-line px-4 text-base font-semibold text-muted transition-colors hover:border-fg hover:text-fg ${className}`}
-      aria-label={`Skift tema. Nu: ${labels[pref]}`}
-      title="Skift mellem mørk, lys og system"
+      aria-label={`${dict.ui.themeNow}: ${labels[pref]}`}
+      title={dict.ui.themeTitle}
     >
       {labels[pref]}
     </button>

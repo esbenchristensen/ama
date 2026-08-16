@@ -1,9 +1,13 @@
-import { faq, geo, origin, pricing, seo, site } from "@/content/site";
+import type { Dictionary } from "@/content/dictionary";
+import { geo, origin, pricingTiers, site } from "@/content/site";
+import { localeMeta, type Locale } from "@/lib/i18n";
 
-export function buildJsonLd() {
-  const clubId = `${origin}/#club`;
-  const websiteId = `${origin}/#website`;
-  const faqId = `${origin}/#faq`;
+export function buildJsonLd(locale: Locale, dict: Dictionary) {
+  const clubId = `${origin}/${locale}#club`;
+  const websiteId = `${origin}/${locale}#website`;
+  const faqId = `${origin}/${locale}#faq`;
+  const pageUrl = `${origin}/${locale}`;
+  const language = localeMeta[locale].og.replace("_", "-");
 
   return {
     "@context": "https://schema.org",
@@ -11,11 +15,11 @@ export function buildJsonLd() {
       {
         "@type": "WebSite",
         "@id": websiteId,
-        url: origin,
+        url: pageUrl,
         name: site.name,
         alternateName: site.shortName,
-        description: seo.description,
-        inLanguage: "da-DK",
+        description: dict.seo.description,
+        inLanguage: language,
         publisher: { "@id": clubId },
       },
       {
@@ -23,8 +27,8 @@ export function buildJsonLd() {
         "@id": clubId,
         name: site.name,
         alternateName: site.shortName,
-        description: seo.description,
-        url: origin,
+        description: dict.seo.description,
+        url: pageUrl,
         email: site.email,
         image: `${origin}/opengraph-image`,
         logo: `${origin}/brand/logo-white.png`,
@@ -49,38 +53,30 @@ export function buildJsonLd() {
         },
         hasMap: geo.maps,
         sport: ["Kickboxing", "Muay Thai", "Boxing", "Mixed Martial Arts"],
-        knowsAbout: [
-          "Kickboxing",
-          "Muay Thai",
-          "Boksning",
-          "MMA",
-          "K1",
-          "Kamphold",
-          "Landshold",
-          "Kampsport for begyndere",
-          "Kampsport for øvede",
-          "Kick'n Burn",
-          "Børnekampsport",
-        ],
+        knowsAbout: [...dict.seo.keywords],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Medlemskab",
-          itemListElement: pricing.tiers.map((tier) => ({
-            "@type": "Offer",
-            name: `${tier.label} ${tier.age}`,
-            price: String(tier.price),
-            priceCurrency: "DKK",
-            url: `${origin}/#priser`,
-            description: `Ubegrænset træning i aldersgruppen ${tier.age}. Ingen binding.`,
-            availability: "https://schema.org/InStock",
-          })),
+          name: dict.pricing.title,
+          itemListElement: dict.pricing.tiers.map((tier) => {
+            const price = pricingTiers.find((item) => item.id === tier.id)?.price ?? 0;
+            return {
+              "@type": "Offer",
+              name: `${tier.label} ${tier.age}`,
+              price: String(price),
+              priceCurrency: "DKK",
+              url: `${pageUrl}#priser`,
+              description: dict.pricing.offerDescription.replace("{age}", tier.age),
+              availability: "https://schema.org/InStock",
+            };
+          }),
         },
       },
       {
         "@type": "FAQPage",
         "@id": faqId,
-        url: `${origin}/#faq`,
-        mainEntity: faq.groups.flatMap((group) =>
+        url: `${pageUrl}#faq`,
+        inLanguage: language,
+        mainEntity: dict.faq.groups.flatMap((group) =>
           group.items.map((item) => ({
             "@type": "Question",
             name: item.q,

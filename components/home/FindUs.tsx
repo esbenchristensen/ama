@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/Button";
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { findUs, geo, site } from "@/content/site";
+import { geo, site } from "@/content/site";
 
 export function FindUs() {
+  const { dict } = useI18n();
+  const { findUs, ui } = dict;
+
   return (
     <section
       id="om"
@@ -30,7 +36,7 @@ export function FindUs() {
             <p className="mt-3 text-base text-faint">{findUs.reception}</p>
             <div className="mt-7">
               <Button href={`mailto:${site.email}`} variant="ghost">
-                Skriv til os
+                {findUs.write}
               </Button>
             </div>
           </div>
@@ -38,10 +44,11 @@ export function FindUs() {
           <div className="relative min-h-80 overflow-hidden rounded-[2rem] sm:min-h-[28rem]">
             <Image
               src="/media/nordkraft.png"
-              alt="Nordkraft i Aalborg, hvor Aalborg Martial Arts træner"
+              alt={ui.nordkraftAlt}
               fill
+              quality={70}
               className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 680px"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="overlay-nordkraft" />
             <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-end justify-between gap-3">
@@ -52,7 +59,7 @@ export function FindUs() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Google Maps
+                {ui.maps}
               </a>
             </div>
           </div>

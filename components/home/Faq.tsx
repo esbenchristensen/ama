@@ -1,10 +1,12 @@
 "use client";
 
 import { useId, useState } from "react";
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { faq } from "@/content/site";
 
 export function Faq() {
+  const { dict } = useI18n();
+  const { faq } = dict;
   const [openId, setOpenId] = useState<string | null>(null);
   const baseId = useId();
 
@@ -56,7 +58,7 @@ export function Faq() {
                             className="mt-0.5 shrink-0 text-lg leading-none text-ama-red"
                             aria-hidden
                           >
-                            {open ? "–" : "+"}
+                            {open ? "-" : "+"}
                           </span>
                         </button>
                       </h4>

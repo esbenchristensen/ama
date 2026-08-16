@@ -1,8 +1,14 @@
+"use client";
+
 import Image from "next/image";
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { doors } from "@/content/site";
+import { site } from "@/content/site";
 
 export function DoorGrid() {
+  const { dict, href } = useI18n();
+  const { doors } = dict;
+
   return (
     <section
       id="hold"
@@ -28,15 +34,16 @@ export function DoorGrid() {
             <a
               key={door.id}
               id={door.id}
-              href={door.href}
+              href={href(door.href)}
               className="group relative min-h-56 scroll-mt-28 overflow-hidden rounded-[1.75rem] sm:min-h-72"
             >
               <Image
                 src={door.image}
-                alt={`${door.title} hos Aalborg Martial Arts`}
+                alt={`${door.title}, ${site.name}`}
                 fill
+                quality={70}
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, 520px"
+                sizes="(max-width: 640px) 100vw, (max-width: 1440px) 50vw, 700px"
               />
               <div className="overlay-photo transition-opacity group-hover:opacity-80" />
               <span className="absolute left-6 top-6 font-display text-2xl text-white/45">

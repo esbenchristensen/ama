@@ -1,23 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useI18n } from "@/components/I18nProvider";
+import { PlayGlyph } from "@/components/home/PlayBadge";
 
 function formatTime(seconds: number) {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
   const minutes = Math.floor(seconds / 60);
   const rest = Math.floor(seconds % 60);
   return `${minutes}:${rest.toString().padStart(2, "0")}`;
-}
-
-function PlayGlyph({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden>
-      <path
-        fill="currentColor"
-        d="M7.4 4.15c0-1.18 1.26-1.93 2.3-1.37l12.1 6.55a1.58 1.58 0 0 1 0 2.74l-12.1 6.55c-1.04.56-2.3-.19-2.3-1.37V4.15Z"
-      />
-    </svg>
-  );
 }
 
 function PauseGlyph({ className }: { className?: string }) {
@@ -56,17 +47,20 @@ function MuteGlyph({ muted, className }: { muted: boolean; className?: string })
 
 export function VideoLightbox({
   src,
+  poster,
   title,
   titleId,
   label,
   onClose,
 }: {
   src: string;
+  poster?: string;
   title: string;
   titleId: string;
   label?: string;
   onClose: () => void;
 }) {
+  const { dict } = useI18n();
   const videoRef = useRef<HTMLVideoElement>(null);
   const hideTimer = useRef<number>(0);
   const [playing, setPlaying] = useState(true);
@@ -170,6 +164,8 @@ export function VideoLightbox({
             className="max-h-[78dvh] w-full bg-black"
             autoPlay
             playsInline
+            preload="metadata"
+            poster={poster}
             onClick={togglePlay}
             onPlay={() => setPlaying(true)}
             onPause={() => {
@@ -201,7 +197,7 @@ export function VideoLightbox({
               type="button"
               onClick={togglePlay}
               className="flex h-12 w-12 items-center justify-center rounded-full bg-ama-red text-white shadow-[0_10px_24px_rgba(0,0,0,0.4)] ring-2 ring-white/20 transition hover:bg-ama-red-hover"
-              aria-label={playing ? "Pause" : "Afspil"}
+              aria-label={playing ? dict.ui.pause : dict.ui.play}
             >
               {playing ? (
                 <PauseGlyph className="h-5 w-5" />
@@ -220,7 +216,7 @@ export function VideoLightbox({
             className={`absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/45 text-white backdrop-blur-sm transition hover:bg-white hover:text-black ${
               controls ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
-            aria-label="Luk video"
+            aria-label={dict.ui.closeVideo}
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
               <path
@@ -243,7 +239,7 @@ export function VideoLightbox({
                 {formatTime(current)}
               </span>
               <label className="relative block min-w-0 flex-1">
-                <span className="sr-only">Spol i videoen</span>
+                <span className="sr-only">{dict.ui.seek}</span>
                 <span className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-white/20" />
                 <span
                   className="absolute top-1/2 left-0 h-1 -translate-y-1/2 rounded-full bg-ama-red"
@@ -265,7 +261,7 @@ export function VideoLightbox({
                 type="button"
                 onClick={toggleMute}
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/35 text-white backdrop-blur-sm hover:bg-white hover:text-black"
-                aria-label={muted ? "Slå lyd til" : "Slå lyd fra"}
+                aria-label={muted ? dict.ui.unmute : dict.ui.mute}
               >
                 <MuteGlyph muted={muted} className="h-5 w-5" />
               </button>
@@ -274,26 +270,5 @@ export function VideoLightbox({
         </div>
       </div>
     </div>
-  );
-}
-
-export function PlayBadge({
-  size = "md",
-  position = "top-left",
-}: {
-  size?: "sm" | "md" | "lg";
-  position?: "top-left" | "center";
-}) {
-  const dim = size === "sm" ? "h-8 w-8" : size === "lg" ? "h-16 w-16" : "h-11 w-11";
-  const place =
-    position === "center"
-      ? "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-      : "left-3.5 top-3.5";
-  return (
-    <span className={`pointer-events-none absolute z-10 ${place} text-white`}>
-      <PlayGlyph
-        className={`${dim} drop-shadow-[0_6px_16px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-110`}
-      />
-    </span>
   );
 }

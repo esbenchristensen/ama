@@ -40,7 +40,6 @@
   --color-invert: var(--invert);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
-  --font-logo: var(--font-logo);
 }
 
 html {
@@ -67,12 +66,6 @@ body {
 .font-display {
   font-family: var(--font-display), system-ui, sans-serif;
   letter-spacing: 0.01em;
-  text-transform: uppercase;
-}
-
-.font-logo {
-  font-family: var(--font-logo), system-ui, sans-serif;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -173,23 +166,29 @@ html[data-theme="light"] .logo-mark {
 }
 
 .fighter-body {
-  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.55));
+  filter:
+    contrast(1.1)
+    saturate(1.14)
+    sepia(0.16)
+    hue-rotate(-12deg)
+    brightness(1.04)
+    drop-shadow(0 18px 22px rgba(0, 0, 0, 0.55));
 }
 
 .section-y {
   scroll-margin-top: 7rem;
-  padding-block: 4.5rem;
+  padding-block: 3.8rem;
 }
 
 @media (min-width: 640px) {
   .section-y {
-    padding-block: 6rem;
+    padding-block: 5.1rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-y {
-    padding-block: 7.5rem;
+    padding-block: 6.4rem;
   }
 }
 

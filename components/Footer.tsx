@@ -1,10 +1,16 @@
+"use client";
+
 import { Button } from "@/components/Button";
+import { useI18n } from "@/components/I18nProvider";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Logo } from "@/components/Logo";
 import { Shell } from "@/components/Shell";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import { hero, megaNav, site } from "@/content/site";
+import { site } from "@/content/site";
 
 export function Footer() {
+  const { dict, href } = useI18n();
+
   return (
     <footer className="relative z-10 pt-16 pb-8 sm:pt-24">
       <Shell>
@@ -13,23 +19,22 @@ export function Footer() {
             <div>
               <Logo className="h-11 sm:h-12" />
               <p className="mt-5 max-w-xs text-base leading-relaxed text-muted">
-                Kickboxing, Muay Thai, boksning, MMA og Kick&apos;n Burn i Nordkraft,
-                Aalborg.
+                {dict.site.footerBlurb}
               </p>
               <address className="mt-6 not-italic text-base text-muted">
                 <p>{site.address.line1}</p>
                 <p>{site.address.line2}</p>
               </address>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Button href={site.conventus.trial}>{hero.cta}</Button>
+                <Button href={site.conventus.trial}>{dict.hero.cta}</Button>
                 <Button href={site.conventus.login} variant="ghost">
-                  Log ind
+                  {dict.ui.login}
                 </Button>
               </div>
             </div>
 
             <div className="grid gap-8 sm:grid-cols-2">
-              {megaNav.map((group) => (
+              {dict.megaNav.map((group) => (
                 <div key={group.id}>
                   <p className="text-sm font-semibold uppercase tracking-[0.16em] text-ama-red">
                     {group.label}
@@ -38,7 +43,7 @@ export function Footer() {
                     {group.items.map((link) => (
                       <li key={`${group.id}-${link.label}`}>
                         <a
-                          href={link.href}
+                          href={href(link.href)}
                           className="text-base text-muted transition-colors hover:text-fg"
                         >
                           {link.label}
@@ -56,13 +61,14 @@ export function Footer() {
               © {new Date().getFullYear()} {site.name} · {site.cvr}
             </p>
             <div className="flex flex-wrap items-center gap-3">
+              <LanguageSwitcher />
               <a
                 href={site.facebook}
                 className="text-base text-muted hover:text-fg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Facebook
+                {dict.ui.facebook}
               </a>
               <a href={`mailto:${site.email}`} className="text-base text-muted hover:text-fg">
                 {site.email}

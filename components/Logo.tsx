@@ -8,6 +8,7 @@ export function Logo({ className = "" }: { className?: string }) {
       width={280}
       height={119}
       className={`logo-mark h-10 w-auto sm:h-11 ${className}`}
+      sizes="176px"
       priority
     />
   );

@@ -1,8 +1,17 @@
+"use client";
+
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { pricing } from "@/content/site";
+import { pricingTiers } from "@/content/site";
 
 export function PriceBoard() {
-  const [senior, ...rest] = pricing.tiers;
+  const { dict } = useI18n();
+  const { pricing } = dict;
+  const tiers = pricing.tiers.map((tier) => ({
+    ...tier,
+    price: pricingTiers.find((item) => item.id === tier.id)?.price ?? 0,
+  }));
+  const [senior, ...rest] = tiers;
 
   return (
     <section
@@ -36,7 +45,7 @@ export function PriceBoard() {
                     {senior.price}
                   </p>
                   <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
-                    kr. / måned
+                    {pricing.perMonth}
                   </p>
                 </div>
               </div>
@@ -56,7 +65,7 @@ export function PriceBoard() {
                       {tier.price}
                     </p>
                     <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">
-                      kr. / md
+                      {pricing.perMonthShort}
                     </p>
                   </div>
                 </div>

@@ -1,7 +1,12 @@
+"use client";
+
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { startSteps } from "@/content/site";
 
 export function StartSteps() {
+  const { dict } = useI18n();
+  const { startSteps } = dict;
+
   return (
     <section id="proeve" className="section-y">
       <Shell>

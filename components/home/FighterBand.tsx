@@ -8,13 +8,11 @@ import {
   useSyncExternalStore,
   type KeyboardEvent,
 } from "react";
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { fighter } from "@/content/site";
 
 const ROTATE_MS = 5000;
-const roster = fighter.fighters;
-const count = roster.length;
-const pendingNames = new Set(["Navn følger", "Kæmper"]);
+const pendingNames = new Set(["Navn følger", "Kæmper", "Name follows", "Fighter"]);
 
 function subscribeReducedMotion(onStoreChange: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -38,6 +36,10 @@ function splitName(name: string) {
 }
 
 export function FighterBand() {
+  const { dict, href } = useI18n();
+  const { fighter } = dict;
+  const roster = fighter.fighters;
+  const count = roster.length;
   const headingId = useId();
   const panelId = useId();
   const [active, setActive] = useState(0);
@@ -85,7 +87,7 @@ export function FighterBand() {
           <div
             className="grid min-h-[32rem] lg:min-h-[38rem] lg:grid-cols-[minmax(16rem,0.82fr)_minmax(0,1.18fr)]"
             role="group"
-            aria-label="Vælg kæmper"
+            aria-label={fighter.pickLabel}
             onKeyDown={onStageKeyDown}
           >
             <div className="relative z-20 flex flex-col px-6 pt-6 pb-3 sm:px-8 sm:pt-8 lg:pb-8">
@@ -142,7 +144,7 @@ export function FighterBand() {
 
               <div className="mt-3 hidden items-center gap-4 lg:mt-8 lg:flex lg:flex-col lg:items-start">
                 <a
-                  href={fighter.ctaHref}
+                  href={href(fighter.ctaHref)}
                   className="text-sm font-semibold text-white/80 underline-offset-4 hover:text-white hover:underline"
                 >
                   {fighter.cta}
@@ -154,9 +156,31 @@ export function FighterBand() {
             </div>
 
             <div className="relative min-h-[24rem] sm:min-h-[28rem]">
+              <svg
+                aria-hidden
+                className="pointer-events-none absolute left-0 top-0 h-0 w-0 overflow-visible"
+              >
+                <filter
+                  id="fighter-grade"
+                  colorInterpolationFilters="sRGB"
+                  x="-5%"
+                  y="-5%"
+                  width="110%"
+                  height="110%"
+                >
+                  <feColorMatrix
+                    type="matrix"
+                    values="
+                      1.08 0.10 0.04 0 0.02
+                      0.05 1.02 0.02 0 0.01
+                      0.00 0.03 0.88 0 0
+                      0    0    0    1 0"
+                  />
+                </filter>
+              </svg>
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,color-mix(in_srgb,var(--ama-red)_32%,transparent)_0%,transparent_58%)]"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,color-mix(in_srgb,#c47a3a_22%,var(--ama-red)_18%)_0%,transparent_58%)]"
               />
 
               <p
@@ -172,7 +196,12 @@ export function FighterBand() {
                   src={person.image}
                   alt={person.name}
                   fill
+                  quality={80}
                   className="fighter-body object-contain object-bottom"
+                  style={{
+                    filter:
+                      "url(#fighter-grade) contrast(1.1) brightness(1.04) drop-shadow(0 18px 22px rgba(0,0,0,0.55))",
+                  }}
                   sizes="(max-width: 1024px) 90vw, 520px"
                 />
               </div>
@@ -184,7 +213,7 @@ export function FighterBand() {
               >
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ama-red">
                   {person.role}
-                  <span className="text-white/35"> · Danmark</span>
+                  <span className="text-white/35"> · {fighter.country}</span>
                 </p>
                 {first ? (
                   <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
@@ -201,7 +230,7 @@ export function FighterBand() {
                 </p>
                 <div className="mt-4 flex items-center gap-4 lg:hidden">
                   <a
-                    href={fighter.ctaHref}
+                    href={href(fighter.ctaHref)}
                     className="text-sm font-semibold text-white underline-offset-4 hover:underline"
                   >
                     {fighter.cta}

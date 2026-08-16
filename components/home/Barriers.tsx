@@ -1,7 +1,12 @@
+"use client";
+
+import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { barriers } from "@/content/site";
 
 export function Barriers() {
+  const { dict } = useI18n();
+  const { barriers } = dict;
+
   return (
     <section
       id="tryghed"
