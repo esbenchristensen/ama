@@ -10,6 +10,18 @@ import { videoMedia } from "@/content/site";
 
 type Voice = Dictionary["voices"]["items"][number];
 
+const liveVideos = new Set<HTMLVideoElement>();
+
+function pauseOthers(except: HTMLVideoElement | null) {
+  for (const video of liveVideos) {
+    if (video !== except) video.pause();
+  }
+}
+
+function srcOf(video: HTMLVideoElement) {
+  return video.getAttribute("src") ?? video.currentSrc;
+}
+
 function VoiceCard({
   item,
   soundOn,
@@ -27,31 +39,48 @@ function VoiceCard({
 }) {
   const articleRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const soundOnRef = useRef(soundOn);
   const stopRef = useRef(onStop);
   const [visible, setVisible] = useState(false);
+  const [pending, setPending] = useState(false);
   const media = videoMedia[item.src];
   const poster = media?.poster;
   const preview = media?.preview ?? item.src;
-  const src = soundOn ? item.src : preview;
-  stopRef.current = onStop;
+  const full = item.src;
+
+  useEffect(() => {
+    soundOnRef.current = soundOn;
+    stopRef.current = onStop;
+  }, [soundOn, onStop]);
 
   useEffect(() => {
     const node = articleRef.current;
     if (!node) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.intersectionRatio >= 0.2) {
           setVisible(true);
           return;
         }
         setVisible(false);
-        if (soundOn) stopRef.current();
+        setPending(false);
+        if (soundOnRef.current) stopRef.current();
       },
-      { threshold: 0.35 },
+      { threshold: [0, 0.2, 0.5] },
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, [soundOn]);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    liveVideos.add(video);
+    return () => {
+      liveVideos.delete(video);
+      video.pause();
+    };
+  }, [visible]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -60,12 +89,42 @@ function VoiceCard({
       video.pause();
       return;
     }
-    video.muted = !soundOn;
-    if (soundOn && video.ended) video.currentTime = 0;
+    if (soundOn) return;
+    video.muted = true;
+    video.loop = true;
+    if (srcOf(video) !== preview) video.src = preview;
+    void video.play().catch(() => {});
+  }, [visible, soundOn, preview]);
+
+  function handleToggle() {
+    const video = videoRef.current;
+    if (!video) {
+      onToggle();
+      return;
+    }
+
+    if (soundOn) {
+      video.pause();
+      video.muted = true;
+      video.loop = true;
+      if (srcOf(video) !== preview) video.src = preview;
+      if (visible) void video.play().catch(() => {});
+      setPending(false);
+      onStop();
+      return;
+    }
+
+    pauseOthers(video);
+    video.muted = false;
+    video.loop = false;
+    if (srcOf(video) !== full) video.src = full;
+    setPending(true);
     void video.play().catch(() => {
-      if (soundOn) stopRef.current();
+      setPending(false);
+      onStop();
     });
-  }, [visible, soundOn, src]);
+    onToggle();
+  }
 
   return (
     <article
@@ -85,28 +144,37 @@ function VoiceCard({
       {visible ? (
         <video
           ref={videoRef}
-          key={src}
           className="absolute inset-0 h-full w-full object-cover"
           muted={!soundOn}
           loop={!soundOn}
           playsInline
-          preload="none"
+          preload="metadata"
           poster={poster}
-          onEnded={soundOn ? () => stopRef.current() : undefined}
+          onPlaying={() => setPending(false)}
+          onWaiting={() => {
+            if (soundOnRef.current) setPending(true);
+          }}
+          onEnded={() => {
+            if (soundOnRef.current) {
+              setPending(false);
+              stopRef.current();
+            }
+          }}
           aria-hidden
-        >
-          <source src={src} type="video/mp4" />
-        </video>
+        />
       ) : null}
       <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/15" />
       <button
         type="button"
-        onClick={onToggle}
+        onClick={handleToggle}
         className="absolute inset-0 z-10 border-0 bg-transparent p-0"
         aria-label={`${soundOn ? pauseLabel : playLabel}: ${item.name}`}
       >
         {soundOn ? null : <PlayBadge size="lg" position="center" />}
       </button>
+      {pending ? (
+        <span className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/25 border-t-white motion-safe:animate-spin" />
+      ) : null}
       <span className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-5 sm:p-6">
         <span className="block font-display text-2xl leading-none text-white sm:text-3xl">
           {item.name}
