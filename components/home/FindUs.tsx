@@ -33,8 +33,20 @@ export function FindUs() {
               <p className="font-display text-3xl text-fg">{site.address.line1}</p>
               <p className="mt-1 text-muted">{site.address.line2}</p>
             </address>
-            <p className="mt-3 text-base text-faint">{findUs.reception}</p>
-            <div className="mt-7">
+            <ul className="mt-8 space-y-4">
+              {findUs.notes.map((note) => (
+                <li key={note.title}>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ama-red">
+                    {note.title}
+                  </p>
+                  <p className="mt-1 text-base leading-relaxed text-muted">{note.body}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button href={`tel:${site.phone.replace(/\s/g, "")}`}>
+                {findUs.call} {site.phone.replace("+45 ", "")}
+              </Button>
               <Button href={`mailto:${site.email}`} variant="ghost">
                 {findUs.write}
               </Button>

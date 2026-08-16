@@ -1,8 +1,9 @@
 "use client";
 
+import { Button } from "@/components/Button";
 import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
-import { pricingTiers } from "@/content/site";
+import { pricingTiers, site } from "@/content/site";
 
 export function PriceBoard() {
   const { dict } = useI18n();
@@ -47,6 +48,13 @@ export function PriceBoard() {
                   <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
                     {pricing.perMonth}
                   </p>
+                  <Button
+                    href={site.conventus.trial}
+                    variant="white"
+                    className="mt-6 w-full sm:w-auto"
+                  >
+                    {dict.hero.cta}
+                  </Button>
                 </div>
               </div>
             </div>

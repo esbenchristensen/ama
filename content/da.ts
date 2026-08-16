@@ -49,6 +49,7 @@ export const da = {
     today: "i dag",
     pickDay: "Vælg dag",
     facebook: "Facebook",
+    instagram: "Instagram",
     maps: "Google Maps",
     nordkraftAlt: "Nordkraft i Aalborg, hvor Aalborg Martial Arts træner",
   },
@@ -198,7 +199,9 @@ export const da = {
     cta: "Book første træning",
     ctaShort: "Første træning",
     secondary: "Sådan foregår det",
-    proof: "Børn, motion og kamphold. Samme klub.",
+    proof: "249 kr. om måneden. Ingen binding. Grej til udlån.",
+    rating: "4,9",
+    ratingMeta: "14 anmeldelser på Google",
     clips: [
       {
         src: "/media/kristoffer.mp4",
@@ -436,7 +439,7 @@ export const da = {
     eyebrow: "Ambition",
     headline: "Landsholdskæmpere",
     watermark: "LANDSHOLD",
-    body: "Seks kæmpere er udtaget til kickboxing-landsholdet. Tre på netto og tre på brutto. Kampholdet er ikke første skridt. Du rykker op, når du er klar.",
+    body: "Seks kæmpere er udtaget til kickboxing-landsholdet. De fleste starter på begynderholdene. Kampholdet er et tilvalg, når du er klar.",
     cta: "Se kamphold",
     ctaHref: soonHref("kamp"),
     photoCredit: "Foto: Krebs Photo",
@@ -501,6 +504,21 @@ export const da = {
     body: "Vi træner i Nordkraft midt i Aalborg. Du er velkommen til at kigge forbi og se en træning, eller booke din første time. Du behøver ikke have besluttet noget på forhånd.",
     reception: "Receptionen er åben mandag og onsdag cirka 17.15-20.00, når der er hold.",
     write: "Skriv til os",
+    call: "Ring",
+    notes: [
+      {
+        title: "Niveau 5",
+        body: "Indgang fra Teglgårds Plads eller Kjellerups Torv. Tag elevator eller trappe op.",
+      },
+      {
+        title: "Omklædning",
+        body: "Der er omklædning i klubben. Tag træningstøj og vand. Grej kan lånes.",
+      },
+      {
+        title: "Reception",
+        body: "Mandag og onsdag cirka 17.15-20.00, når der er hold.",
+      },
+    ],
   },
   newsTeaser: {
     eyebrow: "Klubben",
@@ -514,8 +532,9 @@ export const da = {
   schedule: {
     eyebrow: "Tider",
     title: "Ugeplan",
-    lead: "Vælg en dag og se holdene. Du booker plads, når du er logget ind.",
-    cta: "Book træning",
+    lead: "Vælg en dag og se holdene. Er det din første gang, starter du med knappen her.",
+    cta: "Book første træning",
+    nextLabel: "Næste begynderhold",
     emptyToday: "Ingen hold i dag",
     emptyDay: "Ingen hold {day}",
     emptyHint: "Vælg en anden dag, hvis du vil se resten af ugen.",
@@ -554,7 +573,7 @@ export const da = {
   sponsors: {
     eyebrow: "Samarbejde",
     title: "Vores partnere",
-    lead: "Uden sponsorer hænger en lokal klub ikke sammen. De her virksomheder er med til at holde træning, stævner og hverdagen i Nordkraft kørende.",
+    lead: "De holder træning og hverdagen i Nordkraft kørende.",
     thanks: "Tak fordi I er med.",
     cta: "Bliv sponsor",
     ctaHref: soonHref("sponsorer"),

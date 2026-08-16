@@ -10,20 +10,27 @@ export function soonHref(side?: string) {
 export const geo = {
   latitude: 57.0506,
   longitude: 9.9222,
-  maps: "https://maps.google.com/?q=Teglgaardsplads+1,+9000+Aalborg",
+  maps: "https://maps.google.com/?q=Teglg%C3%A5rds+Plads+1,+9000+Aalborg",
+  reviews:
+    "https://www.google.com/maps/search/?api=1&query=Aalborg+Martial+Arts+Nordkraft",
 } as const;
 
 export const site = {
   name: "Aalborg Martial Arts",
   shortName: "AMA",
   email: "info@aalborgmartialarts.dk",
-  phone: "+45 00 00 00 00",
+  phone: "+45 21 98 51 57",
   cvr: "CVR 00000000",
   address: {
-    line1: "Teglgaardsplads 1",
-    line2: "Nordkraft, 9000 Aalborg",
+    line1: "Teglgårds Plads 1",
+    line2: "Nordkraft, niveau 5, 9000 Aalborg",
   },
   facebook: "https://www.facebook.com/aalborgmartialarts",
+  instagram: "https://www.instagram.com/aalborgmartialartsdk/",
+  google: {
+    rating: "4.9",
+    reviewCount: 14,
+  },
   conventus: {
     trial: "https://aalborgmartialarts.dk/medlem/",
     login: "https://aalborgmartialarts.dk/medlem/medlemslogin/",
@@ -34,6 +41,13 @@ export const site = {
 export const weekdayIds = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 
 export type WeekdayId = (typeof weekdayIds)[number];
+
+export const beginnerClassIds = [
+  "kids-7-10",
+  "kick-thai-beginner",
+  "boxing-beginner",
+  "kicknburn",
+] as const;
 
 export const nextSessions = [
   { day: "mon", time: "16:00", classId: "kids-7-10", spots: "open" },

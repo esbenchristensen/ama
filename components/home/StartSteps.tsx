@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "@/components/Button";
 import { useI18n } from "@/components/I18nProvider";
 import { Shell } from "@/components/Shell";
+import { site } from "@/content/site";
 
 export function StartSteps() {
   const { dict } = useI18n();
@@ -19,22 +21,23 @@ export function StartSteps() {
           </h2>
         </div>
 
-        <ol className="mt-8 grid gap-4 sm:grid-cols-2">
+        <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {startSteps.items.map((item) => (
-            <li
-              key={item.step}
-              className="rounded-[1.75rem] bg-surface px-6 py-7"
-            >
-              <div className="flex items-baseline gap-3">
-                <span className="font-display text-2xl text-ama-red sm:text-3xl">
-                  {String(item.step).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-2xl text-fg">{item.title}</h3>
-              </div>
-              <p className="mt-3 text-base leading-relaxed text-muted">{item.description}</p>
+            <li key={item.step}>
+              <span className="font-display text-2xl text-ama-red sm:text-3xl">
+                {String(item.step).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 font-display text-2xl text-fg">{item.title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-muted">
+                {item.description}
+              </p>
             </li>
           ))}
         </ol>
+
+        <div className="mt-10">
+          <Button href={site.conventus.trial}>{dict.hero.cta}</Button>
+        </div>
       </Shell>
     </section>
   );

@@ -50,6 +50,7 @@ export const en = {
     today: "today",
     pickDay: "Pick a day",
     facebook: "Facebook",
+    instagram: "Instagram",
     maps: "Google Maps",
     nordkraftAlt: "Nordkraft in Aalborg, where Aalborg Martial Arts trains",
   },
@@ -199,7 +200,9 @@ export const en = {
     cta: "Book first session",
     ctaShort: "First session",
     secondary: "How it works",
-    proof: "Kids, fitness and fight team. Same club.",
+    proof: "249 DKK a month. No contract. Gear to borrow.",
+    rating: "4.9",
+    ratingMeta: "14 reviews on Google",
     clips: [
       {
         src: "/media/kristoffer.mp4",
@@ -437,7 +440,7 @@ export const en = {
     eyebrow: "Ambition",
     headline: "National team fighters",
     watermark: "NATIONAL",
-    body: "Six fighters are selected for the Danish kickboxing national team. Three on the A squad and three on the B squad. The fight team is not the first step. You move up when you are ready.",
+    body: "Six fighters are selected for the Danish kickboxing national team. Most people start on the beginner classes. The fight team is a choice you make when you are ready.",
     cta: "See the fight team",
     ctaHref: soonHref("kamp"),
     photoCredit: "Photo: Krebs Photo",
@@ -502,6 +505,21 @@ export const en = {
     body: "We train in Nordkraft in the middle of Aalborg. You are welcome to drop by and watch a session, or book your first class. You do not need to have decided anything in advance.",
     reception: "Reception is open Monday and Wednesday around 17.15-20.00, when there are classes.",
     write: "Write to us",
+    call: "Call",
+    notes: [
+      {
+        title: "Level 5",
+        body: "Enter from Teglgårds Plads or Kjellerups Torv. Take the lift or stairs up.",
+      },
+      {
+        title: "Changing rooms",
+        body: "There are changing rooms in the club. Bring training clothes and water. Gear can be borrowed.",
+      },
+      {
+        title: "Reception",
+        body: "Monday and Wednesday around 17.15-20.00, when there are classes.",
+      },
+    ],
   },
   newsTeaser: {
     eyebrow: "The club",
@@ -515,8 +533,9 @@ export const en = {
   schedule: {
     eyebrow: "Times",
     title: "Weekly schedule",
-    lead: "Pick a day and see the classes. You book a spot when you are logged in.",
-    cta: "Book training",
+    lead: "Pick a day and see the classes. If this is your first time, start with the button here.",
+    cta: "Book first session",
+    nextLabel: "Next beginner class",
     emptyToday: "No classes today",
     emptyDay: "No classes on {day}",
     emptyHint: "Pick another day if you want to see the rest of the week.",
@@ -555,7 +574,7 @@ export const en = {
   sponsors: {
     eyebrow: "Partnership",
     title: "Our partners",
-    lead: "A local club does not work without sponsors. These companies help keep training, events and everyday life in Nordkraft going.",
+    lead: "They help keep training and everyday life in Nordkraft going.",
     thanks: "Thank you for being with us.",
     cta: "Become a sponsor",
     ctaHref: soonHref("sponsorer"),

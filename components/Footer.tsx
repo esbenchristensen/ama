@@ -24,6 +24,11 @@ export function Footer() {
               <address className="mt-6 not-italic text-base text-muted">
                 <p>{site.address.line1}</p>
                 <p>{site.address.line2}</p>
+                <p className="mt-2">
+                  <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-fg">
+                    {site.phone}
+                  </a>
+                </p>
               </address>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button href={site.conventus.trial}>{dict.hero.cta}</Button>
@@ -69,6 +74,14 @@ export function Footer() {
                 rel="noopener noreferrer"
               >
                 {dict.ui.facebook}
+              </a>
+              <a
+                href={site.instagram}
+                className="text-base text-muted hover:text-fg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {dict.ui.instagram}
               </a>
               <a href={`mailto:${site.email}`} className="text-base text-muted hover:text-fg">
                 {site.email}

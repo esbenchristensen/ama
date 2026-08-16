@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { I18nProvider } from "@/components/I18nProvider";
+import { StickyCta } from "@/components/StickyCta";
 import { ThemeScript } from "@/components/ThemeScript";
 import { getDictionary } from "@/content/dictionary";
 import { origin, site } from "@/content/site";
@@ -108,8 +109,11 @@ export default async function RootLayout({
         <I18nProvider locale={lang} dict={dict}>
           <div className="grain" aria-hidden />
           <Header />
-          <main className="relative z-10 flex-1 overflow-x-clip">{children}</main>
+          <main className="relative z-10 flex-1 overflow-x-clip pb-24 lg:pb-0">
+            {children}
+          </main>
           <Footer />
+          <StickyCta />
         </I18nProvider>
       </body>
     </html>

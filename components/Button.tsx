@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-type Variant = "primary" | "ghost" | "outline";
+type Variant = "primary" | "ghost" | "outline" | "white";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -9,6 +9,8 @@ const variants: Record<Variant, string> = {
     "bg-transparent text-fg border border-line hover:border-fg hover:bg-fg hover:text-bg",
   outline:
     "bg-transparent text-ama-red border border-ama-red hover:bg-ama-red hover:text-white",
+  white:
+    "bg-white text-black hover:bg-white/90 border border-transparent",
 };
 
 type ButtonProps = ComponentProps<"a"> & {

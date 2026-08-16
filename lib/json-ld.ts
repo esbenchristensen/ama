@@ -30,9 +30,10 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
         description: dict.seo.description,
         url: pageUrl,
         email: site.email,
+        telephone: site.phone,
         image: `${origin}/opengraph-image`,
         logo: `${origin}/brand/logo-white.png`,
-        sameAs: [site.facebook],
+        sameAs: [site.facebook, site.instagram],
         priceRange: "49-249 DKK",
         currenciesAccepted: "DKK",
         areaServed: {
@@ -41,7 +42,7 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
         },
         address: {
           "@type": "PostalAddress",
-          streetAddress: site.address.line1,
+          streetAddress: `${site.address.line1}, niveau 5`,
           addressLocality: "Aalborg",
           postalCode: "9000",
           addressCountry: "DK",
@@ -52,6 +53,13 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
           longitude: geo.longitude,
         },
         hasMap: geo.maps,
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: site.google.rating,
+          reviewCount: String(site.google.reviewCount),
+          bestRating: "5",
+          worstRating: "1",
+        },
         sport: ["Kickboxing", "Muay Thai", "Boxing", "Mixed Martial Arts"],
         knowsAbout: [...dict.seo.keywords],
         hasOfferCatalog: {

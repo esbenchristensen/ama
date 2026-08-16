@@ -26,7 +26,7 @@ export function ComingSoon({ topic }: { topic?: string }) {
             {title}
           </h1>
           <p className="mt-5 max-w-md text-base leading-7 text-muted">{dict.comingSoon.body}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div data-cta-primary className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button href={site.conventus.trial}>{dict.hero.cta}</Button>
             <Button href={href("/")} variant="ghost">
               {dict.comingSoon.home}
