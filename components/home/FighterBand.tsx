@@ -156,28 +156,6 @@ export function FighterBand() {
             </div>
 
             <div className="relative min-h-[24rem] sm:min-h-[28rem]">
-              <svg
-                aria-hidden
-                className="pointer-events-none absolute left-0 top-0 h-0 w-0 overflow-visible"
-              >
-                <filter
-                  id="fighter-grade"
-                  colorInterpolationFilters="sRGB"
-                  x="-5%"
-                  y="-5%"
-                  width="110%"
-                  height="110%"
-                >
-                  <feColorMatrix
-                    type="matrix"
-                    values="
-                      1.08 0.10 0.04 0 0.02
-                      0.05 1.02 0.02 0 0.01
-                      0.00 0.03 0.88 0 0
-                      0    0    0    1 0"
-                  />
-                </filter>
-              </svg>
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,color-mix(in_srgb,#c47a3a_22%,var(--ama-red)_18%)_0%,transparent_58%)]"
@@ -198,10 +176,6 @@ export function FighterBand() {
                   fill
                   quality={80}
                   className="fighter-body object-contain object-bottom"
-                  style={{
-                    filter:
-                      "url(#fighter-grade) contrast(1.1) brightness(1.04) drop-shadow(0 18px 22px rgba(0,0,0,0.55))",
-                  }}
                   sizes="(max-width: 1024px) 90vw, 520px"
                 />
               </div>

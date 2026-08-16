@@ -94,6 +94,7 @@ export const videoMedia: Record<
   },
   "/media/voice-hold.mp4": {
     poster: "/media/voice-hold-poster.jpg",
+    preview: "/media/voice-hold-preview.mp4",
   },
 };
 
