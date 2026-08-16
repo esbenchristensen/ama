@@ -15,7 +15,6 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [mega, setMega] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileAcc, setMobileAcc] = useState<string | null>("hold");
   const headerRef = useRef<HTMLElement>(null);
   const lastY = useRef(0);
   const menuId = useId();
@@ -63,7 +62,7 @@ export function Header() {
   }, [mobileOpen]);
 
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 768px)");
+    const desktop = window.matchMedia("(min-width: 1024px)");
     const onChange = () => {
       if (desktop.matches) setMobileOpen(false);
     };
@@ -80,7 +79,7 @@ export function Header() {
     <header
       ref={headerRef}
       className={`sticky top-0 z-50 transition-transform duration-300 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
+        hidden ? "-translate-y-full" : ""
       }`}
       onMouseLeave={() => {
         if (!mobileOpen) setMega(null);
@@ -88,13 +87,13 @@ export function Header() {
     >
       <div className="border-b border-line bg-bg/90 backdrop-blur-md">
         <Shell>
-          <div className="flex h-20 items-center justify-between gap-3">
+          <div className="flex h-16 items-center justify-between gap-3 lg:h-20">
             <a href={href("/")} className="shrink-0" aria-label={site.name} onClick={closeAll}>
               <Logo />
             </a>
 
             <nav
-              className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 md:flex lg:gap-1"
+              className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex lg:gap-1"
               aria-label={ui.mainNav}
             >
               {megaNav.map((item) => {
@@ -131,7 +130,7 @@ export function Header() {
             </nav>
 
             <div className="flex shrink-0 items-center gap-2">
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <LanguageSwitcher />
               </div>
               <div className="hidden items-center gap-2 lg:flex">
@@ -144,7 +143,7 @@ export function Header() {
               </div>
               <button
                 type="button"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-fg md:hidden"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-fg lg:hidden"
                 aria-expanded={mobileOpen}
                 aria-controls={`${menuId}-mobile`}
                 aria-label={mobileOpen ? ui.closeMenu : ui.openMenu}
@@ -183,7 +182,7 @@ export function Header() {
               <div
                 key={item.id}
                 id={`${menuId}-${item.id}`}
-                className="absolute inset-x-0 top-full hidden md:block"
+                className="absolute inset-x-0 top-full hidden lg:block"
               >
                 <Shell className="pt-3">
                   <div className="rounded-[1.75rem] border border-line bg-surface p-4 shadow-2xl shadow-black/30 sm:p-5">
@@ -218,70 +217,49 @@ export function Header() {
       {mobileOpen ? (
         <div
           id={`${menuId}-mobile`}
-          className="fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-bg md:hidden"
+          className="fixed inset-x-0 top-16 z-40 h-[calc(100dvh-4rem)] overflow-y-auto bg-bg lg:hidden"
         >
-          <Shell className="flex min-h-full flex-col pb-10 pt-4">
-            <div className="flex flex-col gap-2">
-              <Button href={site.conventus.trial} onClick={closeAll}>
-                {hero.cta}
+          <Shell className="flex flex-col pb-8 pt-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                href={site.conventus.trial}
+                className="h-11 min-w-0 flex-1 py-0"
+                onClick={closeAll}
+              >
+                {hero.ctaShort}
               </Button>
-              <Button href={site.conventus.login} variant="ghost" onClick={closeAll}>
+              <Button
+                href={site.conventus.login}
+                variant="ghost"
+                className="h-11 px-4 py-0"
+                onClick={closeAll}
+              >
                 {ui.login}
               </Button>
-              <div className="pt-1">
-                <LanguageSwitcher />
-              </div>
+              <LanguageSwitcher />
             </div>
 
-            <nav className="mt-6" aria-label={ui.mobileNav}>
-              {megaNav.map((item) => {
-                if (item.items.length === 1) {
-                  const link = item.items[0];
-                  return (
-                    <div key={item.id} className="border-b border-line py-2">
+            <nav className="mt-5" aria-label={ui.mobileNav}>
+              {megaNav.map((item) => (
+                <div key={item.id} className="border-b border-line py-3 first:pt-1">
+                  <p className="px-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-faint">
+                    {item.label}
+                  </p>
+                  <div className="mt-1">
+                    {item.items.map((link) => (
                       <NavItem
+                        key={link.label}
+                        compact
                         icon={link.icon}
-                        label={item.label}
+                        label={link.label}
                         hint={link.hint}
                         href={href(link.href)}
-                        image={"image" in link ? link.image : undefined}
                         onClick={closeAll}
                       />
-                    </div>
-                  );
-                }
-                const open = mobileAcc === item.id;
-                return (
-                  <div key={item.id} className="border-b border-line">
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between py-4 text-left"
-                      aria-expanded={open}
-                      onClick={() => setMobileAcc(open ? null : item.id)}
-                    >
-                      <span className="font-display text-3xl text-fg">{item.label}</span>
-                      <span className="text-ama-red">{open ? "-" : "+"}</span>
-                    </button>
-                    {open ? (
-                      <div
-                        className="grid gap-3 pb-4 sm:grid-cols-2"
-                      >
-                        {item.items.map((link) => (
-                          <NavItem
-                            key={link.label}
-                            icon={link.icon}
-                            label={link.label}
-                            hint={link.hint}
-                            href={href(link.href)}
-                            image={"image" in link ? link.image : undefined}
-                            onClick={closeAll}
-                          />
-                        ))}
-                      </div>
-                    ) : null}
+                    ))}
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </nav>
           </Shell>
         </div>

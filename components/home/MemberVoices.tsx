@@ -146,7 +146,7 @@ export function MemberVoices() {
           </p>
         </div>
 
-        <div className="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
+        <div className="mt-8 -mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-4 pb-1 [scrollbar-width:none] sm:mr-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pr-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
           {voices.items.map((item) => (
             <VoiceCard
               key={item.id}

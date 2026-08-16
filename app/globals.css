@@ -17,13 +17,13 @@
 [data-theme="light"] {
   --ama-red: #d32029;
   --ama-red-hover: #b91c24;
-  --bg: #ecebe6;
-  --bg-elevated: #f6f5f1;
+  --bg: #f4f4f4;
+  --bg-elevated: #fafafa;
   --surface: #ffffff;
   --fg: #111111;
-  --muted: #5c5b57;
-  --faint: #8a8984;
-  --line: #d8d6d0;
+  --muted: #5c5c5c;
+  --faint: #8a8a8a;
+  --line: #e4e4e4;
   --invert: #111111;
 }
 
